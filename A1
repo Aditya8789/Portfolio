@@ -1,0 +1,116 @@
+portfolio/
+│── index.html
+│── style.css
+│── script.js
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Aditya Kumar Upadhyay | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Aditya Kumar Upadhyay</h1>
+  <p class="title">Finance & Corporate Advisory Professional</p>
+</header>
+
+<section class="section">
+  <h2>About Me</h2>
+  <p>
+    Finance professional with a strong foundation in business valuation,
+    financial analysis, and corporate strategy. Experienced in developing
+    detailed financial models, analyzing complex financial data, and preparing
+    high-quality analytical and presentation materials.
+  </p>
+</section>
+
+<section class="section">
+  <h2>Key Skills</h2>
+  <ul class="skills">
+    <li>M&A & Corporate Restructuring</li>
+    <li>Business Valuation</li>
+    <li>Financial Modeling</li>
+    <li>Corporate Finance & Strategy</li>
+  </ul>
+</section>
+
+<section class="section">
+  <h2>Experience & Projects</h2>
+  <ul>
+    <li>Financial Modeling & Valuation Projects</li>
+    <li>M&A Case Studies and Corporate Restructuring Analysis</li>
+    <li>Startup & Business Valuation Assignments</li>
+    <li>Compliance & Corporate Advisory Exposure</li>
+  </ul>
+</section>
+
+<section class="section">
+  <h2>Contact</h2>
+  <p>Email: <a href="mailto:adrsh7050@gmail.com">adrsh7050@gmail.com</a></p>
+  <p>LinkedIn: 
+    <a href="https://www.linkedin.com/in/aditya-upadhyay-874b18228/" target="_blank">
+      View Profile
+    </a>
+  </p>
+</section>
+
+<footer>
+  <p>© 2026 Aditya Kumar Upadhyay</p>
+</footer>
+
+</body>
+</html>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: #f5f7fa;
+  color: #333;
+}
+
+header {
+  background: #0a2540;
+  color: white;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.title {
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+.section {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.section h2 {
+  color: #0a2540;
+  border-bottom: 2px solid #0a2540;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+.skills {
+  list-style: none;
+  padding: 0;
+}
+
+.skills li {
+  background: #e3e8ef;
+  display: inline-block;
+  margin: 5px;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #0a2540;
+  color: white;
+}
