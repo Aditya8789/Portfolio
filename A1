@@ -1,116 +1,836 @@
-portfolio/
-│── index.html
-│── style.css
-│── script.js
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Aditya Kumar Upadhyay | Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aditya Upadhyay — Financial Analyst & Deal Strategist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0A0F1E;
+    --slate: #1A2540;
+    --slate-light: #243050;
+    --gold: #C9A84C;
+    --gold-dim: #8A6E30;
+    --text: #F0F4FF;
+    --text-muted: #8A96B5;
+    --text-dim: #4A5578;
+    --border: rgba(201,168,76,0.15);
+    --border-bright: rgba(201,168,76,0.35);
+    --card-bg: rgba(26,37,64,0.6);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* TICKER */
+  .ticker-wrap {
+    background: var(--slate);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-track {
+    display: inline-flex;
+    gap: 0;
+    animation: ticker 28s linear infinite;
+  }
+  .ticker-item {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    padding: 0 28px;
+    letter-spacing: 0.04em;
+  }
+  .ticker-item span {
+    color: var(--gold);
+    font-weight: 500;
+  }
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,15,30,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    height: 64px;
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-logo em { color: var(--gold); font-style: italic; }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: transparent;
+    border: 1px solid var(--border-bright);
+    color: var(--gold);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--navy); }
+
+  /* HERO */
+  .hero {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 5% 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-eyebrow::after {
+    content: '';
+    display: inline-block;
+    width: 48px;
+    height: 1px;
+    background: var(--gold);
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(42px, 6vw, 80px);
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    max-width: 800px;
+    margin-bottom: 28px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-sub {
+    font-size: 17px;
+    color: var(--text-muted);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+  .btn-secondary {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--border-bright); color: var(--text); }
+
+  /* STATS BAR */
+  .stats-bar {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--slate);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 0;
+  }
+  .stat-item {
+    padding: 28px 32px;
+    border-right: 1px solid var(--border);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-num span { color: var(--gold); }
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 80px 5%;
+  }
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 48px;
+    max-width: 560px;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  /* EXPERTISE GRID */
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .expertise-card {
+    background: var(--navy);
+    padding: 36px 32px;
+    transition: background 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .expertise-card:hover { background: var(--slate); }
+  .expertise-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--gold);
+    transition: height 0.3s;
+  }
+  .expertise-card:hover::before { height: 100%; }
+  .exp-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+    letter-spacing: 0.1em;
+  }
+  .exp-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .exp-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+  .exp-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 24px;
+  }
+  .project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 32px;
+    position: relative;
+    transition: border-color 0.25s, transform 0.25s;
+    backdrop-filter: blur(4px);
+  }
+  .project-card:hover {
+    border-color: var(--border-bright);
+    transform: translateY(-3px);
+  }
+  .project-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--border-bright);
+    padding: 3px 10px;
+    margin-bottom: 20px;
+  }
+  .project-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+  .project-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+  .project-meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .meta-item {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+  }
+  .meta-item strong {
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .project-link {
+    position: absolute;
+    top: 28px; right: 28px;
+    color: var(--text-dim);
+    font-size: 18px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .project-card:hover .project-link { color: var(--gold); }
+
+  /* SKILLS */
+  .skills-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+  .skill-group-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .skill-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(201,168,76,0.07);
+  }
+  .skill-name {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .skill-bar {
+    flex: 1;
+    height: 2px;
+    background: rgba(201,168,76,0.12);
+    margin: 0 16px;
+    position: relative;
+  }
+  .skill-fill {
+    position: absolute;
+    left: 0; top: 0;
+    height: 100%;
+    background: var(--gold);
+    transition: width 1s ease;
+  }
+  .skill-pct {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    min-width: 32px;
+    text-align: right;
+  }
+
+  /* TIMELINE */
+  .timeline {
+    max-width: 680px;
+    position: relative;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 8px;
+    width: 1px;
+    background: var(--border);
+  }
+  .tl-item {
+    padding: 0 0 40px 32px;
+    position: relative;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -4px; top: 6px;
+    width: 9px; height: 9px;
+    border: 1px solid var(--gold);
+    background: var(--navy);
+    transform: rotate(45deg);
+  }
+  .tl-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+  .tl-role {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    margin-bottom: 2px;
+  }
+  .tl-company {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+  .tl-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.65;
+  }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--slate);
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  .contact-section .section-title { max-width: 100%; margin-bottom: 20px; }
+  .contact-sub {
+    color: var(--text-muted);
+    font-size: 15px;
+    margin-bottom: 40px;
+    font-weight: 300;
+  }
+  .contact-grid {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+  }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    padding: 12px 24px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .contact-link:hover { border-color: var(--border-bright); color: var(--gold); }
+  .contact-icon { font-size: 16px; }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    border-top: 1px solid var(--border);
+    padding: 24px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-copy {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+  }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a {
+    font-size: 12px;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .stats-bar { grid-template-columns: 1fr 1fr; }
+    .stat-item:nth-child(2) { border-right: none; }
+    .skills-layout { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
 </head>
 <body>
 
-<header>
-  <h1>Aditya Kumar Upadhyay</h1>
-  <p class="title">Finance & Corporate Advisory Professional</p>
-</header>
+<!-- DEAL TICKER -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-track" id="ticker">
+    <span class="ticker-item">DCF VALUATION <span>▲ ACTIVE</span></span>
+    <span class="ticker-item">M&A ADVISORY <span>▲ ACTIVE</span></span>
+    <span class="ticker-item">DEAL SIZE <span>$50M–$500M</span></span>
+    <span class="ticker-item">LBO MODELING <span>▲ ACTIVE</span></span>
+    <span class="ticker-item">TERM SHEET PREP <span>▲ READY</span></span>
+    <span class="ticker-item">INDUSTRY ANALYSIS <span>▲ ACTIVE</span></span>
+    <span class="ticker-item">PROJECT FINANCE <span>▲ ACTIVE</span></span>
+    <span class="ticker-item">LOI DRAFTING <span>▲ ACTIVE</span></span>
+    <span class="ticker-item">COMPARABLE COMPS <span>▲ ACTIVE</span></span>
+    <span class="ticker-item">WACC <span>8.2%</span></span>
+    <span class="ticker-item">EBITDA ANALYSIS <span>▲ ACTIVE</span></span>
+    <span class="ticker-item">MERGER SYNERGIES <span>▲ ACTIVE</span></span>
+    <span class="ticker-item">DCF VALUATION <span>▲ ACTIVE</span></span>
+    <span class="ticker-item">M&A ADVISORY <span>▲ ACTIVE</span></span>
+    <span class="ticker-item">DEAL SIZE <span>$50M–$500M</span></span>
+    <span class="ticker-item">LBO MODELING <span>▲ ACTIVE</span></span>
+    <span class="ticker-item">TERM SHEET PREP <span>▲ READY</span></span>
+    <span class="ticker-item">INDUSTRY ANALYSIS <span>▲ ACTIVE</span></span>
+    <span class="ticker-item">PROJECT FINANCE <span>▲ ACTIVE</span></span>
+    <span class="ticker-item">LOI DRAFTING <span>▲ ACTIVE</span></span>
+    <span class="ticker-item">COMPARABLE COMPS <span>▲ ACTIVE</span></span>
+    <span class="ticker-item">WACC <span>8.2%</span></span>
+    <span class="ticker-item">EBITDA ANALYSIS <span>▲ ACTIVE</span></span>
+    <span class="ticker-item">MERGER SYNERGIES <span>▲ ACTIVE</span></span>
+  </div>
+</div>
 
-<section class="section">
-  <h2>About Me</h2>
-  <p>
-    Finance professional with a strong foundation in business valuation,
-    financial analysis, and corporate strategy. Experienced in developing
-    detailed financial models, analyzing complex financial data, and preparing
-    high-quality analytical and presentation materials.
-  </p>
-</section>
-
-<section class="section">
-  <h2>Key Skills</h2>
-  <ul class="skills">
-    <li>M&A & Corporate Restructuring</li>
-    <li>Business Valuation</li>
-    <li>Financial Modeling</li>
-    <li>Corporate Finance & Strategy</li>
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Aditya <em>Upadhyay</em></a>
+  <ul class="nav-links">
+    <li><a href="#expertise">Expertise</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
+  <a href="mailto:aditya@email.com" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Financial Analyst &amp; Deal Strategist</p>
+  <h1>Where numbers meet<br><em>deal-making instinct.</em></h1>
+  <p class="hero-sub">I build the financial models, valuation frameworks, and deal structures that give investors and executives the clarity to act with conviction.</p>
+  <div class="hero-actions">
+    <a href="#projects" class="btn-primary">View My Work</a>
+    <a href="#contact" class="btn-secondary">Get in Touch</a>
+  </div>
 </section>
 
-<section class="section">
-  <h2>Experience & Projects</h2>
-  <ul>
-    <li>Financial Modeling & Valuation Projects</li>
-    <li>M&A Case Studies and Corporate Restructuring Analysis</li>
-    <li>Startup & Business Valuation Assignments</li>
-    <li>Compliance & Corporate Advisory Exposure</li>
-  </ul>
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num">15<span>+</span></div>
+    <div class="stat-label">Financial Models Built</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">$2<span>B+</span></div>
+    <div class="stat-label">Deal Value Analyzed</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">8<span>+</span></div>
+    <div class="stat-label">Industries Covered</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">100<span>%</span></div>
+    <div class="stat-label">Accuracy Driven</div>
+  </div>
+</div>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <p class="section-eyebrow">// Core Capabilities</p>
+  <h2 class="section-title">A full-stack analyst for the <em>entire deal lifecycle.</em></h2>
+  <div class="expertise-grid">
+    <div class="expertise-card">
+      <div class="exp-number">01 / 06</div>
+      <span class="exp-icon">📊</span>
+      <h3 class="exp-title">Financial Modeling & Valuation</h3>
+      <p class="exp-desc">Three-statement models, DCF analysis, LBO models, and comparable company analysis. Outputs that hold up in a board room and a diligence room equally.</p>
+    </div>
+    <div class="expertise-card">
+      <div class="exp-number">02 / 06</div>
+      <span class="exp-icon">🤝</span>
+      <h3 class="exp-title">Mergers & Acquisitions</h3>
+      <p class="exp-desc">End-to-end M&A support — target screening, synergy modeling, accretion/dilution analysis, and deal structuring for both buy-side and sell-side mandates.</p>
+    </div>
+    <div class="expertise-card">
+      <div class="exp-number">03 / 06</div>
+      <span class="exp-icon">📋</span>
+      <h3 class="exp-title">LOI & Term Sheet Preparation</h3>
+      <p class="exp-desc">Drafting Letters of Intent and term sheets that protect economic interests, clarify deal economics, and move transactions toward close with precision.</p>
+    </div>
+    <div class="expertise-card">
+      <div class="exp-number">04 / 06</div>
+      <span class="exp-icon">🏗️</span>
+      <h3 class="exp-title">Project Finance</h3>
+      <p class="exp-desc">Infrastructure and energy project modeling: debt waterfall, DSCR analysis, IRR optimization, and lender-ready financial packages for complex capital structures.</p>
+    </div>
+    <div class="expertise-card">
+      <div class="exp-number">05 / 06</div>
+      <span class="exp-icon">🔭</span>
+      <h3 class="exp-title">Industry Analysis</h3>
+      <p class="exp-desc">Deep-dive sector research translating macro trends, competitive dynamics, and regulatory shifts into actionable intelligence for investment decisions.</p>
+    </div>
+    <div class="expertise-card">
+      <div class="exp-number">06 / 06</div>
+      <span class="exp-icon">⚖️</span>
+      <h3 class="exp-title">Deal Documentation</h3>
+      <p class="exp-desc">CIMs, management presentations, investor memos, and pitch decks — crafting the narrative layer that complements the numbers and drives conviction.</p>
+    </div>
+  </div>
 </section>
 
-<section class="section">
-  <h2>Contact</h2>
-  <p>Email: <a href="mailto:adrsh7050@gmail.com">adrsh7050@gmail.com</a></p>
-  <p>LinkedIn: 
-    <a href="https://www.linkedin.com/in/aditya-upadhyay-874b18228/" target="_blank">
-      View Profile
+<!-- PROJECTS -->
+<section id="projects" style="background: var(--slate); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <p class="section-eyebrow">// Selected Work</p>
+  <h2 class="section-title">Projects that <em>moved the needle.</em></h2>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <a href="#" class="project-link">↗</a>
+      <span class="project-tag">M&A / Buy-Side</span>
+      <h3 class="project-title">Pharmaceutical Sector Acquisition Model</h3>
+      <p class="project-desc">Built a fully integrated three-statement merger model for a $180M pharma acquisition, including synergy ramp, purchase price allocation, and goodwill amortization schedule.</p>
+      <div class="project-meta">
+        <div class="meta-item"><strong>Deal Size:</strong> $180M</div>
+        <div class="meta-item"><strong>Synergies:</strong> $12M YR3</div>
+        <div class="meta-item"><strong>Tool:</strong> Excel / VBA</div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <a href="#" class="project-link">↗</a>
+      <span class="project-tag">Project Finance</span>
+      <h3 class="project-title">Renewable Energy Project — Debt Waterfall</h3>
+      <p class="project-desc">Structured a 200MW solar project finance model covering construction facility, term loan, and equity IRR analysis across 20-year operating horizon with DSCR covenants.</p>
+      <div class="project-meta">
+        <div class="meta-item"><strong>CapEx:</strong> ₹1,200 Cr</div>
+        <div class="meta-item"><strong>DSCR:</strong> 1.35x</div>
+        <div class="meta-item"><strong>IRR:</strong> 14.2%</div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <a href="#" class="project-link">↗</a>
+      <span class="project-tag">Valuation</span>
+      <h3 class="project-title">E-Commerce Platform — Pre-IPO Valuation</h3>
+      <p class="project-desc">Conducted comprehensive valuation using DCF, EV/EBITDA comps, and precedent transactions for a Series D e-commerce company preparing for public markets.</p>
+      <div class="project-meta">
+        <div class="meta-item"><strong>Valuation Range:</strong> $420–510M</div>
+        <div class="meta-item"><strong>WACC:</strong> 11.8%</div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <a href="#" class="project-link">↗</a>
+      <span class="project-tag">LOI / Term Sheet</span>
+      <h3 class="project-title">Strategic Partnership Term Sheet — FMCG</h3>
+      <p class="project-desc">Drafted and negotiated term sheet for a co-manufacturing JV between two FMCG players, defining economic splits, IP ownership, exit mechanics, and governance provisions.</p>
+      <div class="project-meta">
+        <div class="meta-item"><strong>JV Revenue:</strong> ₹300 Cr</div>
+        <div class="meta-item"><strong>Timeline:</strong> 6 weeks</div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <a href="#" class="project-link">↗</a>
+      <span class="project-tag">Industry Analysis</span>
+      <h3 class="project-title">Indian Real Estate Sector Deep-Dive</h3>
+      <p class="project-desc">70-page sector report covering demand-supply dynamics, cap rate compression, RERA impact, and investment opportunity mapping across Tier-1 and Tier-2 markets.</p>
+      <div class="project-meta">
+        <div class="meta-item"><strong>Markets:</strong> 12 Cities</div>
+        <div class="meta-item"><strong>Data Sources:</strong> 8+</div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <a href="#" class="project-link">↗</a>
+      <span class="project-tag">LBO / Private Equity</span>
+      <h3 class="project-title">Consumer Brand LBO Model</h3>
+      <p class="project-desc">Full LBO analysis for a PE-sponsored buyout of a D2C consumer brand — debt sizing, PIK toggle, management option pool, and 5-year exit scenario analysis at 3x–5x MOIC.</p>
+      <div class="project-meta">
+        <div class="meta-item"><strong>Entry EV:</strong> $95M</div>
+        <div class="meta-item"><strong>Target IRR:</strong> 25%+</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT / SKILLS -->
+<section id="about">
+  <p class="section-eyebrow">// Profile</p>
+  <h2 class="section-title">Skills &amp; <em>background.</em></h2>
+  <div class="skills-layout">
+    <div>
+      <div class="skill-group-title">Technical Proficiency</div>
+      <div class="skill-row">
+        <span class="skill-name">Financial Modeling (Excel / VBA)</span>
+        <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
+        <span class="skill-pct">95%</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">DCF & Valuation</span>
+        <div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div>
+        <span class="skill-pct">92%</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">M&A Modeling</span>
+        <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
+        <span class="skill-pct">88%</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">Project Finance Modeling</span>
+        <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+        <span class="skill-pct">85%</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">Bloomberg / Capital IQ</span>
+        <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+        <span class="skill-pct">80%</span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">PowerPoint / Pitchbooks</span>
+        <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+        <span class="skill-pct">90%</span>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group-title">Experience Timeline</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date">2023 — Present</div>
+          <div class="tl-role">Financial Analyst</div>
+          <div class="tl-company">Independent / Freelance</div>
+          <div class="tl-desc">Building transaction models, sector reports, and deal documentation for PE firms, corporates, and investment banks across India and Southeast Asia.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2021 — 2023</div>
+          <div class="tl-role">Associate — M&A</div>
+          <div class="tl-company">[Previous Firm]</div>
+          <div class="tl-desc">Executed buy-side and sell-side mandates. Led financial modeling workstreams for 4 closed transactions totaling $350M+ in enterprise value.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2018 — 2021</div>
+          <div class="tl-role">B.Com / MBA Finance</div>
+          <div class="tl-company">[University Name]</div>
+          <div class="tl-desc">Specialized in corporate finance, capital markets, and financial statement analysis. CFA Level I candidate.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <p class="section-eyebrow">// Open for Opportunities</p>
+  <h2 class="section-title" style="max-width:100%">Let's build something <em>valuable.</em></h2>
+  <p class="contact-sub">Available for full-time analyst roles, project-based engagements, and M&A advisory work. Based in India — open to relocation.</p>
+  <a href="mailto:aditya.upadhyay@email.com" class="btn-primary" style="font-size:14px; padding: 16px 40px;">aditya.upadhyay@email.com</a>
+  <div class="contact-grid">
+    <a href="https://linkedin.com/in/aditya-upadhyay" class="contact-link" target="_blank">
+      <span class="contact-icon">in</span> LinkedIn Profile
     </a>
-  </p>
+    <a href="#" class="contact-link">
+      <span class="contact-icon">↓</span> Download Resume
+    </a>
+    <a href="tel:+91XXXXXXXXXX" class="contact-link">
+      <span class="contact-icon">☎</span> Schedule a Call
+    </a>
+  </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  <p>© 2026 Aditya Kumar Upadhyay</p>
+  <span class="footer-copy">© 2025 ADITYA UPADHYAY — ALL RIGHTS RESERVED</span>
+  <div class="footer-links">
+    <a href="#expertise">Expertise</a>
+    <a href="#projects">Work</a>
+    <a href="#contact">Contact</a>
+  </div>
 </footer>
 
 </body>
 </html>
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 0;
-  background: #f5f7fa;
-  color: #333;
-}
-
-header {
-  background: #0a2540;
-  color: white;
-  text-align: center;
-  padding: 40px 20px;
-}
-
-.title {
-  font-size: 18px;
-  opacity: 0.9;
-}
-
-.section {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 0 20px;
-}
-
-.section h2 {
-  color: #0a2540;
-  border-bottom: 2px solid #0a2540;
-  display: inline-block;
-  margin-bottom: 15px;
-}
-
-.skills {
-  list-style: none;
-  padding: 0;
-}
-
-.skills li {
-  background: #e3e8ef;
-  display: inline-block;
-  margin: 5px;
-  padding: 8px 12px;
-  border-radius: 4px;
-}
-
-footer {
-  text-align: center;
-  padding: 20px;
-  background: #0a2540;
-  color: white;
-}
